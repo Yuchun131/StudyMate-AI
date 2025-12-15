@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudyMate AI - 学习规划</title>
+</head>
+<body>
+    <h1>向你的学习助手提问</h1>
+    <form action="/ask" method="POST">
+        <input type="text" name="question" placeholder="例如：如何制定Python学习计划？" size="50">
+        <button type="submit">提问</button>
+    </form>
+    {% if question %}
+        <h3>你的问题：{{ question }}</h3>
+        <p><strong>AI回答：</strong><br>{{ answer }}</p>
+    {% endif %}
+</body>
+</html>

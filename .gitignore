@@ -4,6 +4,7 @@ venv/
 
 # 忽略包含密钥的配置文件
 config.py
+.env
 
 # 忽略Python缓存文件
 __pycache__/

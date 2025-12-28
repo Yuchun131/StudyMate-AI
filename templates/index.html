@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate-AI 智能学习助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 i {
+            color: #667eea;
+            margin-right: 15px;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 150px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn i {
+            margin-right: 10px;
+        }
+        
+        .answer-box {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 5px solid #48bb78;
+        }
+        
+        .answer-box h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .answer-box h3 i {
+            color: #48bb78;
+            margin-right: 10px;
+        }
+        
+        .answer-content {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .feature i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-robot"></i>StudyMate-AI 智能学习助手</h1>
+            <p>基于智谱AI API的个性化学习伙伴 | 专为高效学习设计</p>
+        </div>
+        
+        <div class="card">
+            <form action="/ask" method="POST">
+                <div class="form-group">
+                    <label for="question"><i class="fas fa-question-circle"></i> 请输入你的学习问题：</label>
+                    <textarea 
+                        id="question" 
+                        name="question" 
+                        placeholder="例如：请详细解释Python中的装饰器模式，并给出实际应用场景..."
+                        required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-paper-plane"></i> 获取AI解答
+                </button>
+            </form>
+            
+            {% if answer %}
+            <div class="answer-box">
+                <h3><i class="fas fa-brain"></i> AI智能解答：</h3>
+                <div class="answer-content">
+                    {{ answer }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>快速响应</h3>
+                <p>毫秒级AI回答，提升学习效率</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>专业解答</h3>
+                <p>基于智谱AI大模型，回答准确专业</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-code"></i>
+                <h3>技术栈</h3>
+                <p>Python Flask + 智谱AI API</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>StudyMate-AI 智能学习助手 | 独立开发项目</p>
+            <div class="tech-tags">
+                <span class="tag">Python 3.11</span>
+                <span class="tag">Flask</span>
+                <span class="tag">智谱AI API</span>
+                <span class="tag">RESTful API</span>
+                <span class="tag">HTML/CSS</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

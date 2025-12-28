@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang=“zh-CN”>
+<head>
+    <meta charset=“UTF-8”>
+    <meta name=“viewport” content=“width=device-width, initial-scale=1.0”>
+    <title>📜 StudyMate-AI - 对话记忆</title>
+    <style>
+        body { font-family: ‘Segoe UI’, Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f8f9fa; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .history-item { 
+            background: white; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #4CAF50;
+        }
+        .question { font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
+        .answer { color: #34495e; line-height: 1.6; }
+        .meta { font-size: 0.9em; color: #7f8c8d; margin-top: 15px; text-align: right; }
+        .back-btn { display: inline-block; margin-top: 30px; padding: 10px 20px; background: #6c5ce7; color: white; text-decoration: none; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class=“header”>
+        <h1>📜 对话记忆仓库</h1>
+        <p>这里保存了你与StudyMate-AI的所有思考痕迹。</p>
+    </div>
+
+    {% if histories %}
+        {% for item in histories %}
+        <div class=“history-item”>
+            <div class=“question”>❓ {{ item.question }}</div>
+            <div class=“answer”>🤖 {{ item.answer }}</div>
+            <div class=“meta”>🕒 {{ item.time }}</div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center; color: #95a5a6;">记忆仓库空空如也，快去开始一场对话吧！</p>
+    {% endif %}
+
+    <a href=“/” class=“back-btn”>🏠 返回主页</a>
+</body>
+</html>
